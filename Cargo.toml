@@ -1,0 +1,29 @@
+[package]
+links = "addition"
+name = "bindgen_demo_package"
+version = "1.0.1"
+authors = ["Alex <aw@example.com>""]
+edition = "2024"
+build = "build.rs"
+
+[dependencies]
+bindgen = "0.72.0"
+cc = "1.2.29"
+cxx = "1.0.160"
+gmp-mpfr-sys = { version = "1.6.5" }
+rug = "1.27.0"
+
+[build-dependencies]
+bindgen = "0.72.0"
+cc = "1.2.29"
+cxx-build = "1.0.160"
+pkg-config = "0.3.32"
+
+[lib]
+name = "bindgen_demo"
+path = "src/lib.rs"
+crate-type = ["lib"]
+
+[[bin]]
+name = "bindgen_demo_exe"
+path = "src/bin.rs"
