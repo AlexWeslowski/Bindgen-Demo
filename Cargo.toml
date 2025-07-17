@@ -2,7 +2,7 @@
 links = "addition"
 name = "bindgen_demo_package"
 version = "1.0.1"
-authors = ["Alex <aw@example.com>""]
+authors = ["Alex <aw@example.com>"]
 edition = "2024"
 build = "build.rs"
 

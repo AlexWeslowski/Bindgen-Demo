@@ -153,7 +153,7 @@ fn main() {
         .clang_arg("-I./src/gmpfrxx/")
         .allowlist_function("add_long")
         .allowlist_function("add_double")
-        .opaque_type("std::.*")
+        //.opaque_type("std::.*")
         .parse_callbacks(Box::new(mycallbacks))
         .generate()
         .expect("Unable to generate bindings");
