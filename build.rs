@@ -64,29 +64,29 @@ impl ParseCallbacks for MyCargoCallbacks {
 }
 
 fn main() {
+    // /home/osboxes/Documents/Rust/bindgen-demo
+    let dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     let out_dir = env::var("OUT_DIR").unwrap();
     let bln_static = false;
     let bln_dynamic = !bln_static;
     let lib_name = "addition";
     if bln_static {
-        let _ = fs::copy(format!("/home/osboxes/Documents/Rust/bindgen-demo/src/{}.a", lib_name), format!("{}/{}.a", out_dir, lib_name));
-        let _ = fs::copy(format!("/home/osboxes/Documents/Rust/bindgen-demo/src/lib{}.a", lib_name), format!("{}/lib{}.a", out_dir, lib_name));
+        let _ = fs::copy(format!("{}/src/{}.a", dir, lib_name), format!("{}/{}.a", out_dir, lib_name));
+        let _ = fs::copy(format!("{}/src/lib{}.a", dir, lib_name), format!("{}/lib{}.a", out_dir, lib_name));
         //println!("cargo:rustc-link-lib=static=stdc++");
         println!("cargo:rustc-link-lib=static={}", lib_name);
         println!("cargo:rerun-if-changed=src/{}.a", lib_name);
         println!("cargo:rerun-if-changed=src/lib{}.a", lib_name);
     }
     if bln_dynamic {
-        let _ = fs::copy(format!("/home/osboxes/Documents/Rust/bindgen-demo/src/{}.so", lib_name), format!("{}/{}.so", out_dir, lib_name));
-        let _ = fs::copy(format!("/home/osboxes/Documents/Rust/bindgen-demo/src/lib{}.so", lib_name), format!("{}/lib{}.so", out_dir, lib_name));
+        let _ = fs::copy(format!("{}/src/{}.so", dir, lib_name), format!("{}/{}.so", out_dir, lib_name));
+        let _ = fs::copy(format!("{}/src/lib{}.so", dir, lib_name), format!("{}/lib{}.so", out_dir, lib_name));
         println!("cargo:rustc-link-lib=dylib=stdc++");
         println!("cargo:rustc-link-lib=dylib={}", lib_name);
         println!("cargo:rerun-if-changed=src/{}.so", lib_name);
         println!("cargo:rerun-if-changed=src/lib{}.so", lib_name);
     }
     
-    // /home/osboxes/Documents/Rust/mpmath
-    let dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     println!("cargo:rustc-link-search=native=.");
     println!("cargo:rustc-link-search=native={}", dir);
     println!("cargo:rustc-link-search=native={}/src", dir);
@@ -126,7 +126,7 @@ fn main() {
     */
     
     // 
-    // clang -std=c++11 -Wvla-cxx-extension -Isrc/include -Isrc/gmpfrxx/ -lmpfr -lgmp -lgmpxx src/main_sum/main_sum.cc -o src/obj/
+    // clang -std=c++11 -Wvla-cxx-extension -Isrc/include -Isrc/gmpfrxx/ -lmpfr -lgmp -lgmpxx src/addition.cc -o src/obj/
     // 
     if true {
     let mut funcs: Vec<String> = Vec::new();
